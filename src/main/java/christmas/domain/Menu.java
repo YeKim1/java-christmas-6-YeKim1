@@ -1,6 +1,10 @@
 package christmas.domain;
 
-public enum Menus {
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public enum Menu {
     MUSHROOMSOUP("양송이수프", MenuCategory.APPETIZERS, 6000),
     TAPAS("타파스", MenuCategory.APPETIZERS, 5500),
     CAESARSALAD("시저샐러드", MenuCategory.APPETIZERS, 8000),
@@ -22,7 +26,7 @@ public enum Menus {
     private final MenuCategory category;
     private final int price;
 
-    Menus(String label, MenuCategory category, int price) {
+    Menu(String label, MenuCategory category, int price) {
         this.label = label;
         this.category = category;
         this.price = price;
