@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -24,6 +25,14 @@ public class Order {
         Map<Menu, Integer> orderedMenus = parse(inputOrder);
         validateOnlyBeverages(orderedMenus);
         return new Order(orderedMenus);
+    }
+
+    public Map<String, Integer> getNameAndCount() {
+        return orderedMenus.entrySet().stream()
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey().getLabel(),
+                        Map.Entry::getValue
+                ));
     }
 
     private static Map<Menu, Integer> parse(String inputOrder) {

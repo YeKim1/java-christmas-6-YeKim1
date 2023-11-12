@@ -12,6 +12,8 @@ public class ChristmasController {
         OutputView.printHelloMessage();
         Date date = createDate();
         Order order = createOrder();
+
+        OutputView.printOrderMessage(order.getNameAndCount());
     }
 
     private Date createDate() {

@@ -32,6 +32,10 @@ public enum Menu {
         this.price = price;
     }
 
+    public final String getLabel() {
+        return label;
+    }
+
     public static Menu getByLabel(String label) {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.label.equals(label))
