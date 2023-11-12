@@ -35,6 +35,13 @@ public class Order {
                 ));
     }
 
+    public int calculateTotalPrice() {
+        return orderedMenus.entrySet().stream()
+                .mapToInt(entry ->
+                        entry.getKey().getPrice() * entry.getValue())
+                .sum();
+    }
+
     private static Map<Menu, Integer> parse(String inputOrder) {
         return Arrays.stream(inputOrder.split(DELIMITER_BY_MENU))
                 .map(order -> order.split(DELIMITER_BY_COUNT))
