@@ -31,4 +31,17 @@ public enum Menu {
         this.category = category;
         this.price = price;
     }
+
+    public static Menu getByLabel(String label) {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.label.equals(label))
+                .findAny()
+                .orElse(null);
+    }
+
+    public static List<Menu> getByCategory(MenuCategory menuCategory) {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.category.equals(menuCategory))
+                .collect(Collectors.toList());
+    }
 }
