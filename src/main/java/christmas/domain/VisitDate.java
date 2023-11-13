@@ -16,6 +16,10 @@ public class VisitDate {
         return new VisitDate(Integer.parseInt(inputDate));
     }
 
+    public int getDate() {
+        return date;
+    }
+
     public boolean isWeekend() {
         return WEEKEND_FIRST_DAYS.contains(date % DAYS_IN_WEEK);
     }
