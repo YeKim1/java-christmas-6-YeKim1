@@ -4,9 +4,7 @@ import java.util.List;
 
 public class Date {
     private static final List<Integer> WEEKEND_FIRST_DAYS = List.of(1, 2);
-    private static final List<Integer> SPECIAL_DISCOUNT_DAYS = List.of(3, 10, 17, 24, 25, 26, 31);
-    private static final int DAYS = 7;
-
+    private static final int DAYS_IN_WEEK = 7;
     private final int date;
 
     private Date(int date) {
@@ -18,10 +16,14 @@ public class Date {
     }
 
     public boolean isWeekend() {
-        return WEEKEND_FIRST_DAYS.contains(date % DAYS);
+        return WEEKEND_FIRST_DAYS.contains(date % DAYS_IN_WEEK);
     }
 
-    public boolean isSpecialDay() {
-        return SPECIAL_DISCOUNT_DAYS.contains(date);
+    public boolean isLessThan(int num) {
+        return date < num;
+    }
+
+    public boolean isContainedIn(List<Integer> nums) {
+        return nums.contains(date);
     }
 }
