@@ -19,4 +19,10 @@ public class Discount {
                         event -> event.calculateDiscount(date, order)));
         return new Discount(discounts);
     }
+
+    public int getSumOfDiscount() {
+        return discounts.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 }
