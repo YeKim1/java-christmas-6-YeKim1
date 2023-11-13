@@ -11,7 +11,7 @@ public class OutputView {
     private static final String PRINT_MENU_MESSAGE_FORMAT = "%s %d개";
     private static final String PRINT_TOTAL_PRICE_START_MESSAGE = "\n<할인 전 총주문 금액>";
     private static final String PRINT_TOTAL_PRICE_MESSAGE_FORMAT = "%,d원";
-
+    private static final String GIFT_MENU_HEADER = "\n<증정 메뉴>";
     private static final String NONE = "없음";
 
     public static void printHelloMessage() {
@@ -38,6 +38,18 @@ public class OutputView {
     public static void printTotalPriceMessage(int price) {
         System.out.println(PRINT_TOTAL_PRICE_START_MESSAGE);
         System.out.println(String.format(PRINT_TOTAL_PRICE_MESSAGE_FORMAT, price));
+    }
+
+    public static void printGiftMessage(Map<String, Integer> gift) {
+        System.out.println(GIFT_MENU_HEADER);
+        gift.entrySet().stream().findAny().ifPresentOrElse(
+                entry -> printMenuMessage(gift),
+                OutputView::printNone
+        );
+    }
+
+    public static void printNone() {
+        System.out.println(NONE);
     }
 
     private static void printMenuMessage(Map<String, Integer> menus) {

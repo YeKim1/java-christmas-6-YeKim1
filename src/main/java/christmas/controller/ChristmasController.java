@@ -1,5 +1,7 @@
 package christmas.controller;
 
+import christmas.domain.Discount;
+import christmas.domain.Event;
 import christmas.domain.VisitDate;
 import christmas.domain.Order;
 import christmas.view.InputView;
@@ -10,11 +12,16 @@ public class ChristmasController {
 
     public void startChristmas() {
         OutputView.printHelloMessage();
+
         VisitDate visitDate = createDate();
         Order order = createOrder();
 
-        OutputView.printOrderMessage(order.getNameAndCount());
+        OutputView.printEventPreviewStartMessage(visitDate.getDate());
+        OutputView.printOrderMenuMessage(order.getNameAndCount());
         OutputView.printTotalPriceMessage(order.calculateTotalPrice());
+
+        Discount discount = Discount.of(visitDate, order);
+        OutputView.printGiftMessage(discount.getGiftMenuOrEmpty());
     }
 
     private VisitDate createDate() {
