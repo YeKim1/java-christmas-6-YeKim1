@@ -8,34 +8,45 @@ public enum Event {
     CHRISTMAS_DISCOUNT("크리스마스 디데이 할인", (date, order) -> date.isLessThan(26)) {
         @Override
         public int calculateDiscount(VisitDate visitDate, Order order) {
-            return 1000 + 100 * visitDate.subtractDate(1);
+            return CHRISTMAS_BASE_DISCOUNT +
+                    CHRISTMAS_ADDITION_DISCOUNT * visitDate.subtractDate(CHRISTMAS_FIRST_DAY);
         }
     },
     WEEKEND_DISCOUNT("주말 할인", (date, order) -> date.isWeekend()) {
         @Override
         public int calculateDiscount(VisitDate visitDate, Order order) {
-            return Event.calculateByCategory(order, MenuCategory.MAIN, 2023);
+            return Event.calculateByCategory(order, WEEKEND_DISCOUNT_CATEGORY, WEEK_DISCOUNT_PRICE);
         }
     },
     WEEKDAY_DISCOUNT("평일 할인", (date, order) -> !date.isWeekend()) {
         @Override
         public int calculateDiscount(VisitDate visitDate, Order order) {
-            return Event.calculateByCategory(order, MenuCategory.DESSERTS, 2023);
+            return Event.calculateByCategory(order, WEEKDAY_DISCOUNT_CATEGORY, WEEK_DISCOUNT_PRICE);
         }
     },
     SPECIAL_DISCOUNT("특별 할인", (date, order) ->
             date.isContainedIn(List.of(3, 10, 17, 24, 25, 31))) {
         @Override
         public int calculateDiscount(VisitDate visitDate, Order order) {
-            return 1000;
+            return SPECIAL_DISCOUNT_PRICE;
         }
     },
     GIFTS_EVENT("증정 이벤트", (date, order) -> order.calculateTotalPrice() >= 120000) {
         @Override
         public int calculateDiscount(VisitDate visitDate, Order order) {
-            return Menu.CHAMPAGNE.getPrice();
+            return GIFT.getPrice();
         }
     };
+
+    private static final int CHRISTMAS_BASE_DISCOUNT = 1000;
+    private static final int CHRISTMAS_ADDITION_DISCOUNT = 100;
+    private static final int CHRISTMAS_FIRST_DAY = 1;
+    private static final MenuCategory WEEKEND_DISCOUNT_CATEGORY = MenuCategory.MAIN;
+    private static final MenuCategory WEEKDAY_DISCOUNT_CATEGORY = MenuCategory.DESSERTS;
+    private static final int WEEK_DISCOUNT_PRICE = 2023;
+    private static final int SPECIAL_DISCOUNT_PRICE = 1000;
+    private static final Menu GIFT = Menu.CHAMPAGNE;
+    private static final int GIFT_COUNT = 1;
 
     private final String label;
     private final BiPredicate<VisitDate, Order> condition;
@@ -43,6 +54,14 @@ public enum Event {
     Event(String label, BiPredicate<VisitDate, Order> condition) {
         this.label = label;
         this.condition = condition;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public static Map<String, Integer> getGiftMenu() {
+        return Map.of(GIFT.getLabel(), GIFT_COUNT);
     }
 
     public boolean isMeetCondition(VisitDate visitDate, Order order) {
