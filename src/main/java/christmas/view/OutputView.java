@@ -15,7 +15,7 @@ public class OutputView {
     private static final String EXPECTED_DISCOUNTED_PRICE_HEADER = "\n<할인 후 예상 결제 금액>";
     private static final String MENU_FORMAT = "%s %d개";
     private static final String PRICE_FORMAT = "%,d원";
-    private static final String DISCOUNT_FORMAT = "%s: -%,d원";
+    private static final String DISCOUNT_FORMAT = "%s: %,d원";
     private static final String NONE = "없음";
 
     public static void printWelcomeMessage() {
@@ -62,6 +62,11 @@ public class OutputView {
 
     public static void printNone() {
         System.out.println(NONE);
+    }
+
+    public static void printTotalDiscountPrice(int totalDiscountPrice) {
+        System.out.println(TOTAL_DISCOUNT_PRICE_HEADER);
+        System.out.println(String.format(PRICE_FORMAT, totalDiscountPrice));
     }
 
     private static void printMenus(Map<String, Integer> menus) {
