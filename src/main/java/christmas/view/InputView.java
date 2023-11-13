@@ -20,7 +20,7 @@ public class InputView {
     private static final int MAX_MENU_COUNT_SUM = 20;
 
     public static String inputDate() {
-        OutputView.printInputDateMessage();
+        OutputView.printInputVisitDateMessage();
         return dateValidate(Console.readLine());
     }
 
