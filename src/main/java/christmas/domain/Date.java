@@ -5,6 +5,7 @@ import java.util.List;
 public class Date {
     private static final List<Integer> WEEKEND_FIRST_DAYS = List.of(1, 2);
     private static final int DAYS_IN_WEEK = 7;
+
     private final int date;
 
     private Date(int date) {
@@ -25,5 +26,9 @@ public class Date {
 
     public boolean isContainedIn(List<Integer> nums) {
         return nums.contains(date);
+    }
+
+    public int subtractDate(int num) {
+        return date - num;
     }
 }
