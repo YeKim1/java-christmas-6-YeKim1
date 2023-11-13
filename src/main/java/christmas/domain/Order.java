@@ -2,6 +2,7 @@ package christmas.domain;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -33,6 +34,13 @@ public class Order {
                         entry -> entry.getKey().getLabel(),
                         Map.Entry::getValue
                 ));
+    }
+
+    public Map<Menu, Integer> getOrderedMenusOfCategory(MenuCategory category) {
+        return orderedMenus.entrySet().stream()
+                .filter(entry ->
+                        Menu.getByCategory(category).contains(entry.getKey()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     public int calculateTotalPrice() {
