@@ -18,7 +18,7 @@ public class Discount {
     public static Discount of(VisitDate visitDate, Order order) {
         Map<Event, Integer> discounts = new HashMap<>();
 
-        if (order.calculateTotalPrice() < MIN_TOTAL_PRICE_FOR_DISCOUNT) {
+        if (order.calculateTotalPrice() >= MIN_TOTAL_PRICE_FOR_DISCOUNT) {
             Arrays.stream(Event.values())
                     .filter(event -> event.isMeetCondition(visitDate, order))
                     .forEach(event -> discounts.put(event, event.calculateDiscount(visitDate, order)));
