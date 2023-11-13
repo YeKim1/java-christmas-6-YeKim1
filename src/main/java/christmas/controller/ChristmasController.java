@@ -1,6 +1,6 @@
 package christmas.controller;
 
-import christmas.domain.Date;
+import christmas.domain.VisitDate;
 import christmas.domain.Order;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -10,16 +10,17 @@ public class ChristmasController {
 
     public void startChristmas() {
         OutputView.printHelloMessage();
-        Date date = createDate();
+        VisitDate visitDate = createDate();
         Order order = createOrder();
 
         OutputView.printOrderMessage(order.getNameAndCount());
+        OutputView.printTotalPriceMessage(order.calculateTotalPrice());
     }
 
-    private Date createDate() {
+    private VisitDate createDate() {
         while (true) {
             try {
-                return Date.from(InputView.inputDate());
+                return VisitDate.from(InputView.inputDate());
             } catch (IllegalArgumentException e) {
                 System.out.println(ERROR_MESSAGE_PREFIX + e.getMessage());
             }

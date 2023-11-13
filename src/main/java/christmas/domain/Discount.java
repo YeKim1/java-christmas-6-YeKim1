@@ -12,11 +12,11 @@ public class Discount {
         this.discounts = discounts;
     }
 
-    public static Discount of(Date date, Order order) {
+    public static Discount of(VisitDate visitDate, Order order) {
         Map<Event, Integer> discounts = Arrays.stream(Event.values())
-                .filter(event -> event.isMeetCondition(date, order))
+                .filter(event -> event.isMeetCondition(visitDate, order))
                 .collect(Collectors.toMap(event -> event,
-                        event -> event.calculateDiscount(date, order)));
+                        event -> event.calculateDiscount(visitDate, order)));
         return new Discount(discounts);
     }
 
