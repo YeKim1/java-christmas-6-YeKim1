@@ -30,6 +30,6 @@ public class VisitDateTest {
     void isContainedInTest() {
         VisitDate visitDate = VisitDate.from("5");
 
-        assertThat(true).isEqualTo(visitDate.isContainedIn(List.of(1,2,3,4,5)));
+        assertThat(true).isEqualTo(visitDate.isContainedIn(List.of(1, 2, 3, 4, 5)));
     }
 }

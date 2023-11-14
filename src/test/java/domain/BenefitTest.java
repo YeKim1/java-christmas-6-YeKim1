@@ -41,6 +41,5 @@ public class BenefitTest {
         Benefit benefit = Benefit.of(VisitDate.from("2"), Order.from("초코케이크-1"));
 
         assertThat(benefit.getGiftMenuOrEmpty()).isEqualTo(Collections.EMPTY_MAP);
-
     }
 }

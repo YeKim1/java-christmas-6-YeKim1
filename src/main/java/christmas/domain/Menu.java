@@ -19,8 +19,7 @@ public enum Menu {
 
     ZEROCOLA("제로콜라", MenuCategory.BEVERAGES, 3000),
     REDWINE("레드와인", MenuCategory.BEVERAGES, 60000),
-    CHAMPAGNE("샴페인", MenuCategory.BEVERAGES, 25000)
-    ;
+    CHAMPAGNE("샴페인", MenuCategory.BEVERAGES, 25000);
 
     private final String label;
     private final MenuCategory category;
