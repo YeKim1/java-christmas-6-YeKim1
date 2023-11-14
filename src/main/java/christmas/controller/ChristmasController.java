@@ -15,18 +15,14 @@ public class ChristmasController {
 
         VisitDate visitDate = createDate();
         Order order = createOrder();
-
-        OutputView.printEventPreviewStartMessage(visitDate.getDate());
-        OutputView.printOrder(order.getNameAndCount());
-        OutputView.printTotalPrice(order.calculateTotalPrice());
+        printEventPreviewStartMessage(visitDate);
+        printOrderDetail(order);
 
         Benefit benefit = Benefit.of(visitDate, order);
-        OutputView.printGiftOrNone(benefit.getGiftMenuOrEmpty());
-        OutputView.printDiscountOrNone(benefit.getLabelAndBenefitPrice());
-        OutputView.printTotalBenefitPrice(benefit.getSumOfBenefitPrice());
-        int expectedDiscountedPrice = order.calculateTotalPrice() - benefit.getSumOfDiscountPrice();
-        OutputView.printExpectedDiscountedPrice(expectedDiscountedPrice);
-        OutputView.printBadge(Badge.findByBenefitPrice(benefit.getSumOfBenefitPrice()));
+        printBenefitDetail(benefit);
+        printExpectedDiscountedPrice(
+                order.calculateTotalPrice() - benefit.getSumOfDiscountPrice());
+        printBadge(Badge.findByBenefitPrice(benefit.getSumOfBenefitPrice()));
     }
 
     private VisitDate createDate() {
@@ -47,5 +43,28 @@ public class ChristmasController {
                 System.out.println(ERROR_MESSAGE_PREFIX + e.getMessage());
             }
         }
+    }
+
+    private void printEventPreviewStartMessage(VisitDate visitDate) {
+        OutputView.printEventPreviewStartMessage(visitDate.getDate());
+    }
+
+    private void printOrderDetail(Order order) {
+        OutputView.printOrder(order.getNameAndCount());
+        OutputView.printTotalPrice(order.calculateTotalPrice());
+    }
+
+    private void printBenefitDetail(Benefit benefit) {
+        OutputView.printGiftOrNone(benefit.getGiftMenuOrEmpty());
+        OutputView.printDiscountOrNone(benefit.getLabelAndBenefitPrice());
+        OutputView.printTotalBenefitPrice(benefit.getSumOfBenefitPrice());
+    }
+
+    private void printExpectedDiscountedPrice(int price) {
+        OutputView.printExpectedDiscountedPrice(price);
+    }
+
+    private void printBadge(String badgeLabel) {
+        OutputView.printBadge(badgeLabel);
     }
 }
