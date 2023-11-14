@@ -13,6 +13,7 @@ public class OutputView {
     private static final String DISCOUNT_HEADER = "\n<혜택 내역>";
     private static final String TOTAL_BENEFIT_PRICE_HEADER = "\n<총혜택 금액>";
     private static final String EXPECTED_DISCOUNTED_PRICE_HEADER = "\n<할인 후 예상 결제 금액>";
+    private static final String BADGE_HEADER = "\n<12월 이벤트 배지>";
     private static final String MENU_FORMAT = "%s %d개";
     private static final String PRICE_FORMAT = "%,d원";
     private static final String BENEFIT_FORMAT = "%s: %,d원";
@@ -69,6 +70,11 @@ public class OutputView {
     public static void printExpectedDiscountedPrice(int expectedDiscountedPrice) {
         System.out.println(EXPECTED_DISCOUNTED_PRICE_HEADER);
         System.out.println(String.format(PRICE_FORMAT, expectedDiscountedPrice));
+    }
+
+    public static void printBadge(String badgeLabel) {
+        System.out.println(BADGE_HEADER);
+        System.out.println(badgeLabel);
     }
 
     private static void printMenus(Map<String, Integer> menus) {

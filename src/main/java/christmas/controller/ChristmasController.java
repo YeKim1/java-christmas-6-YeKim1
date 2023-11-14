@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.Badge;
 import christmas.domain.Benefit;
 import christmas.domain.VisitDate;
 import christmas.domain.Order;
@@ -22,6 +23,10 @@ public class ChristmasController {
         Benefit benefit = Benefit.of(visitDate, order);
         OutputView.printGiftOrNone(benefit.getGiftMenuOrEmpty());
         OutputView.printDiscountOrNone(benefit.getLabelAndBenefitPrice());
+        OutputView.printTotalBenefitPrice(benefit.getSumOfBenefitPrice());
+        int expectedDiscountedPrice = order.calculateTotalPrice() - benefit.getSumOfDiscountPrice();
+        OutputView.printExpectedDiscountedPrice(expectedDiscountedPrice);
+        OutputView.printBadge(Badge.findByBenefitPrice(benefit.getSumOfBenefitPrice()));
     }
 
     private VisitDate createDate() {
