@@ -1,6 +1,6 @@
 package christmas.controller;
 
-import christmas.domain.Discount;
+import christmas.domain.Benefit;
 import christmas.domain.VisitDate;
 import christmas.domain.Order;
 import christmas.view.InputView;
@@ -19,9 +19,9 @@ public class ChristmasController {
         OutputView.printOrder(order.getNameAndCount());
         OutputView.printTotalPrice(order.calculateTotalPrice());
 
-        Discount discount = Discount.of(visitDate, order);
-        OutputView.printGiftOrNone(discount.getGiftMenuOrEmpty());
-        OutputView.printDiscountOrNone(discount.getLabelAndDiscount());
+        Benefit benefit = Benefit.of(visitDate, order);
+        OutputView.printGiftOrNone(benefit.getGiftMenuOrEmpty());
+        OutputView.printDiscountOrNone(benefit.getLabelAndBenefitPrice());
     }
 
     private VisitDate createDate() {
