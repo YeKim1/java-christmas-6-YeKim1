@@ -11,12 +11,13 @@ public class OutputView {
     private static final String TOTAL_PRICE_HEADER = "\n<할인 전 총주문 금액>";
     private static final String GIFT_MENU_HEADER = "\n<증정 메뉴>";
     private static final String DISCOUNT_HEADER = "\n<혜택 내역>";
-    private static final String TOTAL_DISCOUNT_PRICE_HEADER = "\n<총혜택 금액>";
+    private static final String TOTAL_BENEFIT_PRICE_HEADER = "\n<총혜택 금액>";
     private static final String EXPECTED_DISCOUNTED_PRICE_HEADER = "\n<할인 후 예상 결제 금액>";
     private static final String MENU_FORMAT = "%s %d개";
     private static final String PRICE_FORMAT = "%,d원";
-    private static final String DISCOUNT_FORMAT = "%s: %,d원";
+    private static final String BENEFIT_FORMAT = "%s: %,d원";
     private static final String NONE = "없음";
+    private static final int NEGATIVE_ONE = -1;
 
     public static void printWelcomeMessage() {
         System.out.println(WELCOME_MESSAGE);
@@ -60,13 +61,14 @@ public class OutputView {
         );
     }
 
-    public static void printNone() {
-        System.out.println(NONE);
+    public static void printTotalBenefitPrice(int totalBenefitPrice) {
+        System.out.println(TOTAL_BENEFIT_PRICE_HEADER);
+        System.out.println(String.format(PRICE_FORMAT, NEGATIVE_ONE * totalBenefitPrice));
     }
 
-    public static void printTotalDiscountPrice(int totalDiscountPrice) {
-        System.out.println(TOTAL_DISCOUNT_PRICE_HEADER);
-        System.out.println(String.format(PRICE_FORMAT, totalDiscountPrice));
+    public static void printExpectedDiscountedPrice(int expectedDiscountedPrice) {
+        System.out.println(EXPECTED_DISCOUNTED_PRICE_HEADER);
+        System.out.println(String.format(PRICE_FORMAT, expectedDiscountedPrice));
     }
 
     private static void printMenus(Map<String, Integer> menus) {
@@ -75,7 +77,11 @@ public class OutputView {
     }
 
     private static void printDiscounts(Map<String, Integer> discounts) {
-        discounts.entrySet().forEach(entry
-                -> System.out.println(String.format(DISCOUNT_FORMAT, entry.getKey(), entry.getValue())));
+        discounts.forEach((key, value)
+                -> System.out.println(String.format(BENEFIT_FORMAT, key, NEGATIVE_ONE * value)));
+    }
+
+    private static void printNone() {
+        System.out.println(NONE);
     }
 }
