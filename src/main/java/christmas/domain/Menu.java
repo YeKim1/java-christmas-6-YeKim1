@@ -39,14 +39,14 @@ public enum Menu {
         return price;
     }
 
-    public static Menu getByLabel(String label) {
+    public static Menu findByLabel(String label) {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.label.equals(label))
                 .findAny()
                 .orElse(null);
     }
 
-    public static List<Menu> getByCategory(MenuCategory menuCategory) {
+    public static List<Menu> findByCategory(MenuCategory menuCategory) {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.category.equals(menuCategory))
                 .collect(Collectors.toList());

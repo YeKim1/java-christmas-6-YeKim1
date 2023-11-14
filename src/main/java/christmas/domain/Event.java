@@ -72,7 +72,7 @@ public enum Event {
         return Map.of(GIFT.getLabel(), GIFT_COUNT);
     }
 
-    public static List<Event> getByType(EventType type) {
+    public static List<Event> findByType(EventType type) {
         return Arrays.stream(Event.values())
                 .filter(event -> event.eventType.equals(type))
                 .collect(Collectors.toList());
@@ -85,7 +85,7 @@ public enum Event {
     public abstract int calculateBenefit(VisitDate visitDate, Order order);
 
     private static int calculateByCategory(Order order, MenuCategory category, int discountPrice) {
-        Map<Menu, Integer> orderedMenuOfCategory = order.getOrderedMenusOfCategory(category);
+        Map<Menu, Integer> orderedMenuOfCategory = order.findOrderedMenusOfCategory(category);
         if (orderedMenuOfCategory.isEmpty()) {
             return 0;
         }

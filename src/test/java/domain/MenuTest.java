@@ -15,7 +15,7 @@ public class MenuTest {
     void getByLabelTest() {
         Menu answer = Menu.BARBECUERIBS;
 
-        Menu menu = Menu.getByLabel("바비큐립");
+        Menu menu = Menu.findByLabel("바비큐립");
 
         assertThat(answer).isEqualTo(menu);
     }
@@ -25,7 +25,7 @@ public class MenuTest {
     void getByCategoryTest() {
         List<Menu> answer = List.of(Menu.CHOCOLATECAKE, Menu.ICECREAM);
 
-        List<Menu> menus = Menu.getByCategory(MenuCategory.DESSERTS);
+        List<Menu> menus = Menu.findByCategory(MenuCategory.DESSERTS);
 
         assertThat(answer).isEqualTo(menus);
     }

@@ -36,7 +36,7 @@ public class Benefit {
     public int getSumOfDiscountPrice() {
         return benefits.entrySet().stream()
                 .filter(benefit ->
-                        Event.getByType(EventType.DISCOUNT).contains(benefit.getKey()))
+                        Event.findByType(EventType.DISCOUNT).contains(benefit.getKey()))
                 .mapToInt(Map.Entry::getValue)
                 .sum();
     }

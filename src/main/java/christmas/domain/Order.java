@@ -34,10 +34,10 @@ public class Order {
                 ));
     }
 
-    public Map<Menu, Integer> getOrderedMenusOfCategory(MenuCategory category) {
+    public Map<Menu, Integer> findOrderedMenusOfCategory(MenuCategory category) {
         return orderedMenus.entrySet().stream()
                 .filter(entry ->
-                        Menu.getByCategory(category).contains(entry.getKey()))
+                        Menu.findByCategory(category).contains(entry.getKey()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
@@ -52,7 +52,7 @@ public class Order {
         return Arrays.stream(inputOrder.split(DELIMITER_BY_MENU))
                 .map(order -> order.split(DELIMITER_BY_COUNT))
                 .collect(Collectors.toMap(
-                        order -> Menu.getByLabel(order[NAME_POSITION]),
+                        order -> Menu.findByLabel(order[NAME_POSITION]),
                         order -> Integer.parseInt(order[COUNT_POSITION])
                 ));
     }
@@ -60,7 +60,7 @@ public class Order {
     private static void validateExistedMenu(String inputOrder) {
         if (Arrays.stream(inputOrder.split(DELIMITER_BY_MENU))
                 .map(order ->
-                        Menu.getByLabel(order.split(DELIMITER_BY_COUNT)[NAME_POSITION]))
+                        Menu.findByLabel(order.split(DELIMITER_BY_COUNT)[NAME_POSITION]))
                 .anyMatch(Objects::isNull)) {
             throw new IllegalArgumentException(ORDER_ERROR_MESSAGE);
         }
@@ -69,7 +69,7 @@ public class Order {
     private static void validateOnlyBeverages(Map<Menu, Integer> orderedMenus) {
         if (orderedMenus.keySet().stream()
                 .allMatch(menu ->
-                        Menu.getByCategory(MenuCategory.BEVERAGES).contains(menu))) {
+                        Menu.findByCategory(MenuCategory.BEVERAGES).contains(menu))) {
             throw new IllegalArgumentException(ONLY_BEVERAGES_ERROR_MESSAGE);
         }
     }
