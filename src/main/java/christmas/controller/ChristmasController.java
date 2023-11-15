@@ -15,10 +15,12 @@ public class ChristmasController {
 
         VisitDate visitDate = createDate();
         Order order = createOrder();
+
         printEventPreviewStartMessage(visitDate);
         printOrderDetail(order);
 
         Benefit benefit = Benefit.of(visitDate, order);
+
         printBenefitDetail(benefit);
         printExpectedDiscountedPrice(
                 order.calculateTotalPrice() - benefit.getSumOfDiscountPrice());
